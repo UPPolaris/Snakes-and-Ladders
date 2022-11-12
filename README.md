@@ -80,9 +80,9 @@ Give credit here.
 
 ## Contact
 Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
-65070099@kmitl.ac.th
-65070174@kmitl.ac.th
-65070130@kmitl.ac.th
+- 65070099@kmitl.ac.th
+- 65070174@kmitl.ac.th
+- 65070130@kmitl.ac.th
 
 
 <!-- Optional -->
