@@ -17,4 +17,7 @@ def main():
     last_count = ((number - count_1) + 1) * count
     total = (tap_num + last_count) + number
     print(total)
+    print(total)
+    print(total)
+    print(total)
 main()
