@@ -40,13 +40,13 @@ screen = pygame.display.set_mode((1000, 600)) #สร้าง&ตั้งค�
 pygame.display.set_caption("Test Game")
 
 table = pygame.image.load("table_1.png")
-screen.blit(table, (0, 0)) #ตั้งให้ห่างจากขอบซ้าย,บน
+screen.blit(table, (0, 0))
 
 #รูปลูกเต๋า
 dice = pygame.image.load("1diceface.png") #เรียกใช้รูปนี้ได้จากตัวแปรชื่อ dice
-xy_dice_img = (700, 40)
-reg_for_dice_img = pygame.Rect(700, 40, 200, 200)
-screen.blit(dice, xy_dice_img) #เอา dice ไปแสดงที่ จุดห่างจากขอบซ้าย 700, จากขอบบน 40
+dice_img_position = (700, 40)
+dice_img_area = pygame.Rect(700, 40, 200, 200)
+screen.blit(dice, dice_img_position) #เอา dice ไปแสดงที่ จุดห่างจากขอบซ้าย 700, จากขอบบน 40
 
 #ปุ่มทอยเต๋า (พื้นที่ไว้กดทอยเต๋า)
 color = (255,255,255) #กำหนด RGB ของสี
@@ -83,12 +83,12 @@ while True:
             if button_diceroll.collidepoint(mouse_pos):
                 for _ in range(12):
                     dice_result, dice_img = diceroll()
-                    screen.blit(dice_img, xy_dice_img)
-                    pygame.display.update(reg_for_dice_img)
+                    screen.blit(dice_img, dice_img_position)
+                    pygame.display.update(dice_img_area)
                     time.sleep(0.08)
                 #ทดสอบ
                 player_position[0] += dice_result
-                screen.blit(table, (0, 0))
+                #screen.blit(table, (0, 0))
                 draw_circle()
                 pygame.display.update()
                 
