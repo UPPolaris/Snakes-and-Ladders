@@ -3,7 +3,7 @@ import random
 import time
 
 ladder={6: 35,
-        41: 97,
+        41: 79,
         57: 65,
         75: 95}
 
@@ -62,9 +62,11 @@ screen.blit(text, (758, 275))
 #ตัว player
 draw_circle()
 
-turn_font = pygame.font.Font('freesansbold.ttf', 20)
+turn_font = pygame.font.Font('freesansbold.ttf', 40)
 trun_text = turn_font.render("Player 1 Turn", True, p_color[0], (0,0,0))
-screen.blit(trun_text, (610, 275))
+screen.blit(trun_text, (620, 480))
+
+log_font = pygame.font.Font('freesansbold.ttf', 18)
 
 pygame.display.update() #สั่งให้อัพเดทหน้าจอ เอาไว้ใช้ตอนเปลี่ยนภาพ (เจาะจงพื้นที่ได้)
 #------------------------------------------------------------------------------------------------------------------
@@ -89,6 +91,7 @@ def playing_func():
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouse_pos = pygame.mouse.get_pos()
                 if button_diceroll.collidepoint(mouse_pos):
+                    pygame.draw.rect(screen, (0,0,0), pygame.Rect(600, 340, 400, 130))#เอาไว้ปิดตัวหนังสือ log
                     for _ in range(6):
                         dice_result, dice_img = diceroll()
                         screen.blit(dice_img, xy_dice_img)
@@ -96,8 +99,23 @@ def playing_func():
                         time.sleep(0.08)
                     if player_position[player_order] + dice_result <= 100:
                         player_position[player_order] += dice_result
+                        #print("player %d got %d point"%(player_order+1, dice_result))
+                        log_text = log_font.render("Player %d got %d point"%(player_order+1, dice_result), True, p_color[player_order], (0,0,0))
+                        screen.blit(log_text, (620, 400))
+                        log_text = log_font.render("Player %d move to %d  "%(player_order+1, player_position[player_order]), True, p_color[player_order], (0,0,0))
+                        screen.blit(log_text, (620, 420))
+                        if player_position[player_order] in snake:
+                            log_text = log_font.render("Oh no Player %d falling from %d to %d"%(player_order+1, player_position[player_order], snake.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
+                            screen.blit(log_text, (620, 440))
+                            player_position[player_order] = snake.get(player_position[player_order])
+                        elif player_position[player_order] in ladder:
+                            log_text = log_font.render("Oh yeah Player %d climbing from %d to %d"%(player_order+1, player_position[player_order], ladder.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
+                            screen.blit(log_text, (620, 440))
+                            player_position[player_order] = ladder.get(player_position[player_order])
                     else:
-                        print("player %d must roll %d point to win"%(player_order+1, 100-(player_position[player_order])))
+                        log_text = log_font.render("player %d must roll %d point to win"%(player_order+1, 100-(player_position[player_order])), True, p_color[player_order], (0,0,0))
+                        screen.blit(log_text, (620, 420))
+                        #print("player %d must roll %d point to win"%(player_order+1, 100-(player_position[player_order])))
                     screen.blit(table, (0, 0))
                     draw_circle()
                     pygame.display.update()
@@ -107,9 +125,8 @@ def playing_func():
                     player_order += 1
                     if player_order > 3:
                         player_order = 0
-                    turn_font = pygame.font.Font('freesansbold.ttf', 20)
                     trun_text = turn_font.render("Player %d Turn"%(player_order+1), True, p_color[player_order], (0,0,0))
-                    screen.blit(trun_text, (610, 275))
+                    screen.blit(trun_text, (620, 480))
                     pygame.display.update()
 def end_game(winner):
     """when end game (some player win)"""
