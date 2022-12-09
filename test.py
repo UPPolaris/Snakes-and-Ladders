@@ -12,8 +12,8 @@ snake ={49: 13,
         87: 51,
         98: 3}
 
-player_position = [1, 1, 1, 1] 
-
+player_position = [1, 1, 1, 1]
+p_color = [(255, 255, 255), (255, 0, 0), (0, 255, 0), (0, 0, 255), ]
 def set_position_each_block():
     """position at down-left corner for each block in table"""
     block_position_dict = {}
@@ -32,10 +32,10 @@ block_position_dict = set_position_each_block()
 
 def draw_circle():
     """draw player circle"""
-    pygame.draw.circle(screen, color, ((block_position_dict.get(player_position[0])[0] + 10), (600-block_position_dict.get(player_position[0])[1])-50), 10, 20) #player1
-    pygame.draw.circle(screen, (255,0,0), ((block_position_dict.get(player_position[1])[0] + 50), (600-block_position_dict.get(player_position[1])[1])-50), 10, 20) #player2
-    pygame.draw.circle(screen, (0,255,0), ((block_position_dict.get(player_position[2])[0] + 10), (600-block_position_dict.get(player_position[2])[1])-10), 10, 20) #player3
-    pygame.draw.circle(screen, (0,0,255), ((block_position_dict.get(player_position[3])[0] + 50), (600-block_position_dict.get(player_position[3])[1])-10), 10, 20) #player4
+    pygame.draw.circle(screen, p_color[0], ((block_position_dict.get(player_position[0])[0] + 10), (600-block_position_dict.get(player_position[0])[1])-50), 10, 20) #player1
+    pygame.draw.circle(screen, p_color[1], ((block_position_dict.get(player_position[1])[0] + 50), (600-block_position_dict.get(player_position[1])[1])-50), 10, 20) #player2
+    pygame.draw.circle(screen, p_color[2], ((block_position_dict.get(player_position[2])[0] + 10), (600-block_position_dict.get(player_position[2])[1])-10), 10, 20) #player3
+    pygame.draw.circle(screen, p_color[3], ((block_position_dict.get(player_position[3])[0] + 50), (600-block_position_dict.get(player_position[3])[1])-10), 10, 20) #player4
 
 #เปิดเกมมาต้องทำไรบ้าง---------------------------------------------------------------------------------------------------
 pygame.init()
@@ -62,9 +62,12 @@ screen.blit(text, (758, 275))
 #ตัว player
 draw_circle()
 
+turn_font = pygame.font.Font('freesansbold.ttf', 20)
+trun_text = turn_font.render("Player 1 Turn", True, p_color[0], (0,0,0))
+screen.blit(trun_text, (610, 275))
+
 pygame.display.update() #สั่งให้อัพเดทหน้าจอ เอาไว้ใช้ตอนเปลี่ยนภาพ (เจาะจงพื้นที่ได้)
 #------------------------------------------------------------------------------------------------------------------
-
 
 def diceroll():
     result = random.randint(1,6)
@@ -76,22 +79,54 @@ def diceroll():
     elif result == 6: dice = pygame.image.load("6diceface.png")
     return result, dice #ส่งกลับค่า แต้มที่ออก, รูปลูกเต๋า
 
+def playing_func():
+    """func to operate game"""
+    player_order = 0 # 0คือp1 1คือp2
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                mouse_pos = pygame.mouse.get_pos()
+                if button_diceroll.collidepoint(mouse_pos):
+                    for _ in range(6):
+                        dice_result, dice_img = diceroll()
+                        screen.blit(dice_img, xy_dice_img)
+                        pygame.display.update(reg_for_dice_img)
+                        time.sleep(0.08)
+                    if player_position[player_order] + dice_result <= 100:
+                        player_position[player_order] += dice_result
+                    else:
+                        print("player %d must roll %d point to win"%(player_order+1, 100-(player_position[player_order])))
+                    screen.blit(table, (0, 0))
+                    draw_circle()
+                    pygame.display.update()
+                    if player_position[player_order] == 100:
+                        winner = player_order+1
+                        end_game(winner)
+                    player_order += 1
+                    if player_order > 3:
+                        player_order = 0
+                    turn_font = pygame.font.Font('freesansbold.ttf', 20)
+                    trun_text = turn_font.render("Player %d Turn"%(player_order+1), True, p_color[player_order], (0,0,0))
+                    screen.blit(trun_text, (610, 275))
+                    pygame.display.update()
+def end_game(winner):
+    """when end game (some player win)"""
+    #---สร้างcover (ฉาก)----------------------------------------------------------------------
+    scene_cover = pygame.Surface((1000, 600))
+    scene_cover.set_alpha(200)
+    scene_cover.fill((255, 255, 255))
+    screen.blit(scene_cover, (0, 0))
+    #---สร้างตัวหนังสือ winner----------------------------------------------------------------------
+    win_font = pygame.font.Font('freesansbold.ttf', 80)
+    win_text = win_font.render("Player %d Win"%winner, True, (0,0,0))
+    screen.blit(win_text, (250, 260))
+    pygame.display.update()
+    #---ใส่ลูปไม่ให้เกมออกเอง----------------------------------------------------------------------
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            quit()
-        elif event.type == pygame.MOUSEBUTTONUP:
-            mouse_pos = pygame.mouse.get_pos()
-            if button_diceroll.collidepoint(mouse_pos):
-                for _ in range(12):
-                    dice_result, dice_img = diceroll()
-                    screen.blit(dice_img, xy_dice_img)
-                    pygame.display.update(reg_for_dice_img)
-                    time.sleep(0.08)
-                #ทดสอบ
-                player_position[0] += dice_result #คะแนนของ player 1 เพิ่ม(แค่คนเดียว)
-                #screen.blit(table, (0, 0))
-                draw_circle()
-                pygame.display.update()
-                
+playing_func()
