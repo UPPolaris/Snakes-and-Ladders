@@ -25,12 +25,12 @@ def draw_circle():
 
 def diceroll():
     """สุ่มผลลูกเต๋าแล้วส่งค่ากลับ"""
-    result = random.randint(0,5)
-    return result+1, dice_img_list[result] #ส่งกลับค่า แต้มที่ออก, รูปลูกเต๋า
+    dice_result[0] = random.randint(1,6)
+    dice_img[0] = dice_img_list[dice_result[0]-1]
 
 def playing_func():
     """func to operate main game scene"""
-    player_order = 0 # 0==p1, 1==p2, 2==p3, 3==p4
+    player_order = 0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -39,36 +39,31 @@ def playing_func():
                 mouse_pos = pygame.mouse.get_pos()
                 if button_diceroll_area.collidepoint(mouse_pos):
                     pygame.draw.rect(screen, (0,0,0), pygame.Rect(600, 340, 400, 130)) #เอาไว้ปิดตัวหนังสือ log
+                    for aaa in range(0, 4):
+                        log_message_list[aaa] = blank_text
                     #---สุ่มเต๋า 6 ครั้ง---------------------------------------
                     for _ in range(6):
-                        dice_result, dice_img = diceroll()
-                        screen.blit(dice_img, dice_img_position)
+                        diceroll()
+                        screen.blit(dice_img[0], dice_img_position)
                         pygame.display.update(dice_img_area)
                         time.sleep(0.08)
 
                     #---ถ้าแต้มปัจจุบัน+ที่ได้เพิ่ม ยังไม่เกิน 100---------------------------------------
-                    if player_position[player_order] + dice_result <= 100: 
-                        player_position[player_order] += dice_result #เพิ่มแต้มผู้เล่นคนนั้น
+                    if player_position[player_order] + dice_result[0] <= 100: 
+                        player_position[player_order] += dice_result[0] #เพิ่มแต้มผู้เล่นคนนั้น
                         #---แสดงข้อความ: ได้กี่แต้ม---------------------------------------
-                        log_text = log_font.render("Player %d got %d point"%(player_order+1, dice_result), True, p_color[player_order], (0,0,0))
-                        screen.blit(log_text, (620, 400))
+                        log_message_list[0] = log_font.render("Player %d got %d point"%(player_order+1, dice_result[0]), True, p_color[player_order], (0,0,0))
                         #---แสดงข้อความ: เดินไปไหน---------------------------------------
-                        log_text = log_font.render("Player %d move to %d  "%(player_order+1, player_position[player_order]), True, p_color[player_order], (0,0,0))
-                        screen.blit(log_text, (620, 420))
+                        log_message_list[1] = log_font.render("Player %d move to %d  "%(player_order+1, player_position[player_order]), True, p_color[player_order], (0,0,0))
                         #---เช็คว่าเหยียบงูหรือบันไดมั้ย---------------------------------------
                         check_ladder_and_snake(player_order)
 
                     #---ถ้าแต้มจะเกิน 100 หรืออื่นๆ---------------------------------------
                     else:
                         #---แสดงข้อความ: ต้องทอยให้ได้กี่แต้ม------------------------------------
-                        log_text = log_font.render("player %d must roll %d point to win"%(player_order+1, 100-(player_position[player_order])), True, p_color[player_order], (0,0,0))
-                        screen.blit(log_text, (620, 420))
+                        log_message_list[0] = log_font.render("player %d must roll %d point to win"%(player_order+1, 100-(player_position[player_order])), True, p_color[player_order], (0,0,0))
 
-                    #---วาดรูปตารางทับที่เดิม------------------------------------
-                    screen.blit(table, (0, 0))
-                    #---วาดรูปวงกลมผู้เล่นทับตาราง------------------------------------
-                    draw_circle()
-
+                    main_game_ui()
                     pygame.display.update()
 
                     #---ถ้าคนปัจจุบันชนะ------------------------------------
@@ -76,36 +71,33 @@ def playing_func():
                         winner = player_order+1
                         end_game(winner)
 
-                    player_order += 1
-
                 #---เตรียมพร้อมสำหรับครั้งถัดไป------------------------------------
+                    player_order += 1
                     if player_order > 3:
                         player_order = 0
-                    trun_text = turn_font.render("Player %d Turn"%(player_order+1), True, p_color[player_order], (0,0,0))
-                    screen.blit(trun_text, (620, 480))
+                    log_message_list[3] = turn_font.render("Player %d Turn"%(player_order+1), True, p_color[player_order], (0,0,0))
+                    screen.blit(log_message_list[3], (620, 480))
                     pygame.display.update()
 
 def check_ladder_and_snake(player_order):
     """move player that step on snake or ladder"""
     if player_position[player_order] in snake:
+        question_popup()
         #---แสดงข้อความ: ไหลลงจากหัวงู---------------------
-        log_text = log_font.render("Oh no Player %d falling from %d to %d"%(player_order+1, player_position[player_order], snake.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
-        screen.blit(log_text, (620, 440))
+        log_message_list[2] = log_font.render("Oh no Player %d falling from %d to %d"%(player_order+1, player_position[player_order], snake.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
+        screen.blit(log_message_list[2], (620, 440))
         #---เปลี่ยนตำแหน่งผู้เล่น---------------------
         player_position[player_order] = snake.get(player_position[player_order])
 
     elif player_position[player_order] in ladder:
-        log_text = log_font.render("Oh yeah Player %d climbing from %d to %d"%(player_order+1, player_position[player_order], ladder.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
-        screen.blit(log_text, (620, 440))
+        log_message_list[2] = log_font.render("Oh yeah Player %d climbing from %d to %d"%(player_order+1, player_position[player_order], ladder.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
+        screen.blit(log_message_list[2], (620, 440))
         player_position[player_order] = ladder.get(player_position[player_order])
 
 def end_game(winner):
     """work when game end (some player win)"""
     #---สร้างcover (ฉากพื้นหลังบางๆ)----------------------------------------------------------------------
-    scene_cover = pygame.Surface((1000, 600))
-    scene_cover.set_alpha(200)
-    scene_cover.fill((255, 255, 255))
-    screen.blit(scene_cover, (0, 0))
+    screen.blit(white_scene_cover, (0, 0))
     #---สร้างตัวหนังสือของผู้ชนะ----------------------------------------------------------------------
     win_font = pygame.font.Font('freesansbold.ttf', 80)
     win_text = win_font.render("Player %d Win"%winner, True, (0,0,0))
@@ -133,9 +125,11 @@ def main_game_ui():
     pygame.draw.rect(screen, (255,255,255), button_diceroll_area) #วาดสี่เหลี่ยม (วาดบนไหน ,สี ,คุณลักษณะสี่เหลี่ยม)
     #phase 2 สร้างตัวหนังสือมาวางทับ
     screen.blit(rolldice_font.render('Roll Dice', True, (0,0,0)), (758, 275)) #เขียน text ลงบนจอ
-    #---แสดงตาของผู้เล่นคนแรก-------------------------------------------------
-    trun_text = turn_font.render("Player 1 Turn", True, p_color[0], (0,0,0))
-    screen.blit(trun_text, (620, 480))
+    #---แสดง log text-------------------------------------------------
+    screen.blit(log_message_list[0], (620, 400))
+    screen.blit(log_message_list[1], (620, 420))
+    screen.blit(log_message_list[2], (620, 440))
+    screen.blit(log_message_list[3], (620, 480))
     #************สั่งให้อัพเดทหน้าจอ****************
     pygame.display.update() #สั่งให้อัพเดทหน้าจอ เอาไว้ใช้ตอนเปลี่ยนภาพ (เจาะจงพื้นที่ได้)
 
@@ -159,6 +153,27 @@ def main_menu():
                 elif quit_bt_area.collidepoint(mouse_pos):
                     quit()
 
+def question_popup():
+    """question when step at snake"""
+    screen.blit(white_scene_cover, (0, 0))
+    true_button_area = pygame.Rect(210,270,210,120)
+    false_button_area = pygame.Rect(570,270,210,120)
+    pygame.draw.rect(screen, (0,0,0), true_button_area)
+    pygame.draw.rect(screen, (0,0,0), false_button_area)
+    pygame.display.update()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                mouse_pos = pygame.mouse.get_pos()
+                if true_button_area.collidepoint(mouse_pos):
+                    return 0
+                elif false_button_area.collidepoint(mouse_pos):
+                    return 0
+                
+
+
 #*******************เปิดเกมมาต้องทำไรบ้าง********************************************************************************
 #---สร้าง & ตั้งค่าขนาดหน้าจอ-------------------------------------------------
 pygame.init()
@@ -166,6 +181,7 @@ screen = pygame.display.set_mode((1000, 600))
 pygame.display.set_caption("Snake and Ladder Inwza007")
 
 #*******************สร้างตัวแปรสำคัญๆหลักๆ********************************************************************************
+
 #*****งูและบันได ถ้าตกช่องไหน(key)ให้ไปตรงไหน(value)******
 ladder={6: 35,
         41: 79,
@@ -176,6 +192,11 @@ snake ={49: 13,
         67: 46,
         87: 51,
         98: 3}
+
+#*****แต้ม และ ภาพลูกเต๋าปัจจุบัน*******
+dice_result = [1]
+dice_img = [pygame.image.load("1diceface.png")]
+
 #*****ภาพลูกเต๋า*******
 dice_img_list = [pygame.image.load("1diceface.png"), \
                 pygame.image.load("2diceface.png"), \
@@ -202,9 +223,26 @@ p_color = [(255, 255, 255), (255, 0, 0), (0, 255, 0), (0, 0, 255)]
 rolldice_font = pygame.font.Font('freesansbold.ttf', 20) #กำหนด font และขนาด ใส่ไปในตัวแปร
 turn_font = pygame.font.Font('freesansbold.ttf', 40)
 log_font = pygame.font.Font('freesansbold.ttf', 18)
+answer_font = pygame.font.Font('freesansbold.ttf', 30)
+
+blank_text = turn_font.render("", True, (0,0,0))
+
+#*****ข้อความสถานะการณ์*******
+log_message_list = [blank_text, blank_text, blank_text, blank_text] #ทอยได้กี่แต้ม เดินไปที่ไหน เหยียบงูหรือขึ้นบันไดจากไหนไปไหน ตาของใคร
+
+#*****scene_cover*******
+white_scene_cover = pygame.Surface((1000, 600))
+white_scene_cover.set_alpha(200)
+white_scene_cover.fill((255, 255, 255))
+black_scene_cover = pygame.Surface((1000, 600))
+black_scene_cover.set_alpha(200)
+black_scene_cover.fill((0, 0, 0))
+#*****คำถามถ้าตกหัวงู*******
+question = {0: ("1+1 == 2", True)}
 #------------------------------------------------------------------------------------------------------------------
 
 block_position_dict = set_position_each_block() #กำหนดจุดพิกัด(x, y)ล่างซ้ายของแต่ละช่องในตารางเกม
+log_message_list[3] = turn_font.render("Player 1 Turn", True, p_color[0], (0,0,0))
 main_menu()
 main_game_ui()
 playing_func()
