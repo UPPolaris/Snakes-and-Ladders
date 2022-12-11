@@ -82,16 +82,10 @@ def playing_func():
 def check_ladder_and_snake(player_order):
     """move player that step on snake or ladder"""
     if player_position[player_order] in snake:
-        question_popup()
-        #---แสดงข้อความ: ไหลลงจากหัวงู---------------------
-        log_message_list[2] = log_font.render("Oh no Player %d falling from %d to %d"%(player_order+1, player_position[player_order], snake.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
-        screen.blit(log_message_list[2], (620, 440))
-        #---เปลี่ยนตำแหน่งผู้เล่น---------------------
-        player_position[player_order] = snake.get(player_position[player_order])
+        question_popup(player_order)
 
     elif player_position[player_order] in ladder:
         log_message_list[2] = log_font.render("Oh yeah Player %d climbing from %d to %d"%(player_order+1, player_position[player_order], ladder.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
-        screen.blit(log_message_list[2], (620, 440))
         player_position[player_order] = ladder.get(player_position[player_order])
 
 def end_game(winner):
@@ -153,24 +147,44 @@ def main_menu():
                 elif quit_bt_area.collidepoint(mouse_pos):
                     quit()
 
-def question_popup():
+def question_popup(player_order):
     """question when step at snake"""
-    screen.blit(white_scene_cover, (0, 0))
-    true_button_area = pygame.Rect(210,270,210,120)
-    false_button_area = pygame.Rect(570,270,210,120)
-    pygame.draw.rect(screen, (0,0,0), true_button_area)
-    pygame.draw.rect(screen, (0,0,0), false_button_area)
+    screen.blit(black_scene_cover, (0, 0))
+    true_button_area = pygame.Rect(210,350,210,120)
+    false_button_area = pygame.Rect(570,350,210,120)
+    pygame.draw.rect(screen, (255,255,255), true_button_area)
+    pygame.draw.rect(screen, (255,255,255), false_button_area)
+    screen.blit(answer_font.render("True", True, (0, 150, 0)), (240, 380))
+    screen.blit(answer_font.render("False", True, (150, 0, 0)), (600, 380))
+    head1_text = header_font.render("Player %d step on snake head"%(player_order+1), True, p_color[player_order])
+    head2_text = header_font.render("select right answer to reject this", True, p_color[player_order])
+    question_number = random.randint(1, len(question_dict))
+    question_text = question_font.render(question_dict[question_number][0], True, p_color[player_order])
+    screen.blit(head1_text, (200, 80))
+    screen.blit(head2_text, (200, 110))
+    screen.blit(question_text, (200, 180))
     pygame.display.update()
-    while True:
+    answer_select = False
+    while not answer_select:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouse_pos = pygame.mouse.get_pos()
                 if true_button_area.collidepoint(mouse_pos):
-                    return 0
+                    answer = True
+                    answer_select = True
                 elif false_button_area.collidepoint(mouse_pos):
-                    return 0
+                    answer = False
+                    answer_select = True
+    if answer == question_dict[question_number][1]:
+        log_message_list[2] = log_font.render("but nothing happened", True, p_color[player_order], (0,0,0))
+    else:
+        #---แสดงข้อความ: ไหลลงจากหัวงู & เปลี่ยนตำแหน่งผู้เล่น---------------------
+        log_message_list[2] = log_font.render("Oh no Player %d falling from %d to %d"%(player_order+1, player_position[player_order], snake.get(player_position[player_order])), True, p_color[player_order], (0,0,0))
+        player_position[player_order] = snake.get(player_position[player_order])
+    return
+
                 
 
 
@@ -223,7 +237,9 @@ p_color = [(255, 255, 255), (255, 0, 0), (0, 255, 0), (0, 0, 255)]
 rolldice_font = pygame.font.Font('freesansbold.ttf', 20) #กำหนด font และขนาด ใส่ไปในตัวแปร
 turn_font = pygame.font.Font('freesansbold.ttf', 40)
 log_font = pygame.font.Font('freesansbold.ttf', 18)
-answer_font = pygame.font.Font('freesansbold.ttf', 30)
+answer_font = pygame.font.Font('freesansbold.ttf', 60)
+header_font = pygame.font.Font('freesansbold.ttf', 25)
+question_font = pygame.font.Font('freesansbold.ttf', 55)
 
 blank_text = turn_font.render("", True, (0,0,0))
 
@@ -235,10 +251,16 @@ white_scene_cover = pygame.Surface((1000, 600))
 white_scene_cover.set_alpha(200)
 white_scene_cover.fill((255, 255, 255))
 black_scene_cover = pygame.Surface((1000, 600))
-black_scene_cover.set_alpha(200)
+black_scene_cover.set_alpha(220)
 black_scene_cover.fill((0, 0, 0))
 #*****คำถามถ้าตกหัวงู*******
-question = {0: ("1+1 == 2", True)}
+question_dict = {1: ("1+1 == 2", True), \
+    2: ("You like this game", True), \
+    3: ("You will Rate us 5 Stars", True), \
+    4: ("PSCP is the best subject", True), \
+    5: ("Not True", False), \
+    6: ("'2' == 2", False), \
+    7: ("Chocolate is safe for dog", False)}
 #------------------------------------------------------------------------------------------------------------------
 
 block_position_dict = set_position_each_block() #กำหนดจุดพิกัด(x, y)ล่างซ้ายของแต่ละช่องในตารางเกม
