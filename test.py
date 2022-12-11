@@ -16,8 +16,6 @@ def set_position_each_block():
                 block_position_dict[countt] = (600-((col+1)*60), row*60)
     return block_position_dict
 
-block_position_dict = set_position_each_block()
-
 def draw_circle():
     """draw player circle"""
     pygame.draw.circle(screen, p_color[0], ((block_position_dict.get(player_position[0])[0] + 10), (600-block_position_dict.get(player_position[0])[1])-50), 10, 20) #player1
@@ -27,17 +25,11 @@ def draw_circle():
 
 def diceroll():
     """สุ่มผลลูกเต๋าแล้วส่งค่ากลับ"""
-    result = random.randint(1,6)
-    if result == 1: dice = pygame.image.load("1diceface.png")
-    elif result == 2: dice = pygame.image.load("2diceface.png")
-    elif result == 3: dice = pygame.image.load("3diceface.png")
-    elif result == 4: dice = pygame.image.load("4diceface.png")
-    elif result == 5: dice = pygame.image.load("5diceface.png")
-    elif result == 6: dice = pygame.image.load("6diceface.png")
-    return result, dice #ส่งกลับค่า แต้มที่ออก, รูปลูกเต๋า
+    result = random.randint(0,5)
+    return result+1, dice_img_list[result] #ส่งกลับค่า แต้มที่ออก, รูปลูกเต๋า
 
 def playing_func():
-    """func to operate game"""
+    """func to operate main game scene"""
     player_order = 0 # 0==p1, 1==p2, 2==p3, 3==p4
     while True:
         for event in pygame.event.get():
@@ -45,13 +37,13 @@ def playing_func():
                 quit()
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouse_pos = pygame.mouse.get_pos()
-                if button_diceroll.collidepoint(mouse_pos):
+                if button_diceroll_area.collidepoint(mouse_pos):
                     pygame.draw.rect(screen, (0,0,0), pygame.Rect(600, 340, 400, 130)) #เอาไว้ปิดตัวหนังสือ log
                     #---สุ่มเต๋า 6 ครั้ง---------------------------------------
                     for _ in range(6):
                         dice_result, dice_img = diceroll()
-                        screen.blit(dice_img, xy_dice_img)
-                        pygame.display.update(reg_for_dice_img)
+                        screen.blit(dice_img, dice_img_position)
+                        pygame.display.update(dice_img_area)
                         time.sleep(0.08)
 
                     #---ถ้าแต้มปัจจุบัน+ที่ได้เพิ่ม ยังไม่เกิน 100---------------------------------------
@@ -126,6 +118,53 @@ def end_game(winner):
             if event.type == pygame.QUIT:
                 quit()
 
+def main_game_ui():
+    """create UI for main game screen"""
+    #---ถมดำก่อน-------------------------------------------------
+    pygame.draw.rect(screen, (0,0,0), (0,0,1000,600))
+    #---วาดภาพตารางลงไปบนจอ-------------------------------------------------
+    screen.blit(table, (0, 0))
+    #---วาดภาพหน้าลูกเต๋าไปบนจอ-------------------------------------------------
+    screen.blit(dice_img_list[0], dice_img_position) #เอา diceimg ไปแสดงที่ จุดห่างจากขอบซ้าย 700, จากขอบบน 40
+    #---วาด player ทั้ง 4 (วงกลม)-------------------------------------------------
+    draw_circle()
+    #---วาดปุ่มทอยเต๋าลงไปบนจอ-------------------------------------------------
+    #phase 1 สร้างสี่เหลี่ยมมาเป็น bg ปุ่ม
+    pygame.draw.rect(screen, (255,255,255), button_diceroll_area) #วาดสี่เหลี่ยม (วาดบนไหน ,สี ,คุณลักษณะสี่เหลี่ยม)
+    #phase 2 สร้างตัวหนังสือมาวางทับ
+    screen.blit(rolldice_font.render('Roll Dice', True, (0,0,0)), (758, 275)) #เขียน text ลงบนจอ
+    #---แสดงตาของผู้เล่นคนแรก-------------------------------------------------
+    trun_text = turn_font.render("Player 1 Turn", True, p_color[0], (0,0,0))
+    screen.blit(trun_text, (620, 480))
+    #************สั่งให้อัพเดทหน้าจอ****************
+    pygame.display.update() #สั่งให้อัพเดทหน้าจอ เอาไว้ใช้ตอนเปลี่ยนภาพ (เจาะจงพื้นที่ได้)
+
+def main_menu():
+    """main menu ui and operate"""
+    menu_bg_img = pygame.image.load("Mainmenu_bg.png")
+    screen.blit(menu_bg_img, (0, 0))
+    start_bt_area = pygame.Rect(120,430,250,155)
+    quit_bt_area = pygame.Rect(630,430,250,155)
+    #pygame.draw.rect(screen, (255,255,255), start_bt_area)
+    #pygame.draw.rect(screen, (255,255,255), quit_bt_area)
+    pygame.display.update()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                mouse_pos = pygame.mouse.get_pos()
+                if start_bt_area.collidepoint(mouse_pos):
+                    return 0
+                elif quit_bt_area.collidepoint(mouse_pos):
+                    quit()
+
+#*******************เปิดเกมมาต้องทำไรบ้าง********************************************************************************
+#---สร้าง & ตั้งค่าขนาดหน้าจอ-------------------------------------------------
+pygame.init()
+screen = pygame.display.set_mode((1000, 600))
+pygame.display.set_caption("Snake and Ladder Inwza007")
+
 #*******************สร้างตัวแปรสำคัญๆหลักๆ********************************************************************************
 #*****งูและบันได ถ้าตกช่องไหน(key)ให้ไปตรงไหน(value)******
 ladder={6: 35,
@@ -137,6 +176,21 @@ snake ={49: 13,
         67: 46,
         87: 51,
         98: 3}
+#*****ภาพลูกเต๋า*******
+dice_img_list = [pygame.image.load("1diceface.png"), \
+                pygame.image.load("2diceface.png"), \
+                pygame.image.load("3diceface.png"), \
+                pygame.image.load("4diceface.png"), \
+                pygame.image.load("5diceface.png"), \
+                pygame.image.load("6diceface.png")]
+dice_img_position = (700, 40)
+dice_img_area = pygame.Rect(700, 40, 200, 200)
+
+#*****ภาพตาราง*******
+table = pygame.image.load("table_1.png")
+
+#*****ปุ่มทอยเต๋า*******
+button_diceroll_area = pygame.Rect(750, 260, 100, 50) #(สีเหลี่ยมที่ตำแหน่ง ห่างขอบซ้าย750 ห่างบน260 กว้าง100 สูง50) (ประมาณว่าคุณลักษณะสี่เหลี่ยม)
 
 #*****ตำแหน่งของแต่ละผู้เล่น ตามลำดับ******
 player_position = [1, 1, 1, 1]
@@ -144,43 +198,13 @@ player_position = [1, 1, 1, 1]
 #*****สีของแต่ละผู้เล่น ตามลำดับ*******
 p_color = [(255, 255, 255), (255, 0, 0), (0, 255, 0), (0, 0, 255)]
 
-#*******************เปิดเกมมาต้องทำไรบ้าง********************************************************************************
-#---สร้าง & ตั้งค่าขนาดหน้าจอ-------------------------------------------------
-pygame.init()
-screen = pygame.display.set_mode((1000, 600))
-pygame.display.set_caption("Test Game")
-
-#---วาดภาพตารางลงไปบนจอ-------------------------------------------------
-table = pygame.image.load("table_1.png")
-screen.blit(table, (0, 0))
-
-#---วาดภาพหน้าลูกเต๋าไปบนจอ-------------------------------------------------
-dice = pygame.image.load("1diceface.png") #เรียกใช้รูปนี้ได้จากตัวแปรชื่อ dice
-xy_dice_img = (700, 40)
-reg_for_dice_img = pygame.Rect(700, 40, 200, 200)
-screen.blit(dice, xy_dice_img) #เอา dice ไปแสดงที่ จุดห่างจากขอบซ้าย 700, จากขอบบน 40
-
-#---วาดปุ่มทอยเต๋าลงไปบนจอ-------------------------------------------------
-#phase 1 สร้างสี่เหลี่ยมมาเป็น bg ปุ่ม
-color = (255,255,255) #กำหนด RGB ของสี
-button_diceroll = pygame.Rect(750, 260, 100, 50) #(สีเหลี่ยมที่ตำแหน่ง ห่างขอบซ้าย750 ห่างบน260 กว้าง100 สูง50) (ประมาณว่าคุณลักษณะสี่เหลี่ยม)
-pygame.draw.rect(screen, color, button_diceroll) #วาดสี่เหลี่ยม (วาดบนไหน ,สี ,คุณลักษณะสี่เหลี่ยม)
-#phase 2 สร้างตัวหนังสือมาวางทับ
-font = pygame.font.Font('freesansbold.ttf', 20) #กำหนด font และขนาด ใส่ไปในตัวแปร
-text = font.render('Roll Dice', True, (0,0,0)) #สร้าง text แล้วเอาไปใส่ในตัวแปรชื่อ text
-screen.blit(text, (758, 275)) #เขียน text ลงบนจอ
-
-#---วาด player ทั้ง 4 (วงกลม)-------------------------------------------------
-draw_circle()
-
-#---แสดงตาของผู้เล่นคนแรก-------------------------------------------------
+#*****กำหนด font*******
+rolldice_font = pygame.font.Font('freesansbold.ttf', 20) #กำหนด font และขนาด ใส่ไปในตัวแปร
 turn_font = pygame.font.Font('freesansbold.ttf', 40)
-trun_text = turn_font.render("Player 1 Turn", True, p_color[0], (0,0,0))
-screen.blit(trun_text, (620, 480))
-
-#************สั่งให้อัพเดทหน้าจอ****************
-pygame.display.update() #สั่งให้อัพเดทหน้าจอ เอาไว้ใช้ตอนเปลี่ยนภาพ (เจาะจงพื้นที่ได้)
+log_font = pygame.font.Font('freesansbold.ttf', 18)
 #------------------------------------------------------------------------------------------------------------------
 
-log_font = pygame.font.Font('freesansbold.ttf', 18)
+block_position_dict = set_position_each_block() #กำหนดจุดพิกัด(x, y)ล่างซ้ายของแต่ละช่องในตารางเกม
+main_menu()
+main_game_ui()
 playing_func()
