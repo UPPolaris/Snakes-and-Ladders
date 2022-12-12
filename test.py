@@ -258,7 +258,7 @@ question_dict = {1: ("1+1 == 2", True), \
     2: ("You like this game", True), \
     3: ("You will Rate us 5 Stars", True), \
     4: ("PSCP is the best subject", True), \
-    5: ("Not True", False), \
+    5: ("not True", False), \
     6: ("'2' == 2", False), \
     7: ("Chocolate is safe for dog", False), \
     8: ("AJ Chotipat is handsome", True)}
