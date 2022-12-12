@@ -6,7 +6,8 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
+* [Start Menu](#start-menu)
+* [Table](#table)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
@@ -37,8 +38,10 @@ List the ready features here:
 - Awesome feature 3
 
 
-## Screenshots
-![Example screenshot](https://cdn.shopify.com/s/files/1/0876/1176/files/i984_pimgpsh_fullsize_distr.png?v=1525140332)
+## Start Menu
+![Example screenshot](https://raw.githubusercontent.com/UPPolaris/Snakes-and-Ladders/master/Mainmenu_bg.png)
+## Table
+![Example screenshot](https://raw.githubusercontent.com/UPPolaris/Snakes-and-Ladders/master/table_1.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
@@ -73,17 +76,18 @@ To do:
 
 ## Acknowledgements
 Give credit here.
-- This project was inspired by...
+- This project was inspired by... 
+![Everything Is AWESOME](https://img.youtube.com/vi/fv8mgvsuSKY/0.jpg)![](https://www.youtube.com/watch?v=fv8mgvsuSKY "Everything Is AWESOME")
 - This project was based on [this tutorial](https://www.example.com).
 - Many thanks to...
 
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
-- 65070099@kmitl.ac.th
-- 65070130@kmitl.ac.th
-- 65070166@kmitl.ac.th
-- 65070174@kmitl.ac.th
+Created by
+- 👑 65070130@kmitl.ac.th [PARAMET CHUATHONG]     --> [Leader, Programmer_1]
+- 👨‍💼 65070099@kmitl.ac.th [THANAWAN CHAEMSATHIAN] --> [Programmer, Tester]
+- 👨‍💼 65070166@kmitl.ac.th [PONGSAPUCK TONGJUNTUG] --> [Programmer, Tester]
+- 👨‍💼 65070174@kmitl.ac.th [PAKIN JUNJUMLONG]      --> [UX_UI Design, Programmer]
 
 
 <!-- Optional -->
