@@ -260,7 +260,8 @@ question_dict = {1: ("1+1 == 2", True), \
     4: ("PSCP is the best subject", True), \
     5: ("Not True", False), \
     6: ("'2' == 2", False), \
-    7: ("Chocolate is safe for dog", False)}
+    7: ("Chocolate is safe for dog", False), \
+    8: ("AJ Chotipat is handsome", True)}
 #------------------------------------------------------------------------------------------------------------------
 
 block_position_dict = set_position_each_block() #กำหนดจุดพิกัด(x, y)ล่างซ้ายของแต่ละช่องในตารางเกม
