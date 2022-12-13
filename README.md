@@ -1,4 +1,4 @@
-# Snake-and-Ladders
+# Snake-and-Ladders 🐍🪜
 > 📌100-square snake and ladder game players, 2-4
 Everyone must have played the famous game Snakes and Ladders. Alternatively, through the eyes through the ears Snakes and ladders may be a board game that we are all familiar with.
 But wouldn't it be wonderful if we made this game simpler to play? Therefore, specifically for that, our group created this snakes and ladders game. which we've taken our understanding of Python from PSCP class.
@@ -6,7 +6,7 @@ Use this project to review and improve your programming knowledge in Python.
 Enjoy playing our game ^_^
 <!-- Live demo [_here_](https://www.example.com). """If you have the project hosted somewhere, include the link here.""" -->
 
-## Table of Contents
+## 📃Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
@@ -21,8 +21,8 @@ Enjoy playing our game ^_^
 <!-- * [License](#license) -->
 
 
-## General Information
-> Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
+## 📚General Information
+> 📖 Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
 As for how the game operates, he designed it himself after researching it from numerous sources.
 When a player steps on the snake's head, a question will emerge; if the player properly answers, the question will not descend to the snake's tail. This is an addition to the traditional snake and ladder game. However, if the response is incorrect, it will descend to the snake's tail.
 - There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
@@ -31,7 +31,7 @@ When a player steps on the snake's head, a question will emerge; if the player p
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
-## Technologies Used
+## 💻Technologies Used
 - Tech 1 - python version 3.10
 - Tech 2 - pygame version 1.9.6
 - Tech 3 - vscode & live share
@@ -57,7 +57,7 @@ What are the project requirements/dependencies? Where are they listed? A require
 Proceed to describe how to install / setup one's local environment / get started with the project.
 
 
-## Function
+## 💻Function
 ### **<span style="font-size:100px;">`main_menu function`</span>**   
 Load the image of the home page. Then define the area of the start button and the exit button.
 If we click the mouse and the position of the mouse in the area of the button The command of that button will work.
@@ -76,7 +76,7 @@ https://github.com/UPPolaris/Snakes-and-Ladders/blob/04573650739466c93c6ad6a650d
 ![img](https://raw.githubusercontent.com/UPPolaris/Snakes-and-Ladders/master/playing_func%20function.png)
 
 
-## Project Status
+## 📝Project Status
 Project is : ✅ _complete_
 
 
@@ -92,7 +92,7 @@ To do:
 - Feature to be added 2
 
 
-## Acknowledgements
+## 📑Acknowledgements
 Give credit here. 
 - https://th.wikipedia.org/wiki/เกมบันไดงู
 - https://www.w3schools.com/python/
@@ -103,7 +103,7 @@ Give credit here.
 [![Here](https://img.youtube.com/vi/fv8mgvsuSKY/0.jpg)](https://www.youtube.com/watch?v=fv8mgvsuSKY)
 
 
-## Contact
+## 🎯Contact
 Created by
 - 👑 65070130@kmitl.ac.th [PARAMET CHUATHONG]     --> [Leader, Programmer_1]
 - 👨‍💼 65070099@kmitl.ac.th [THANAWAN CHAEMSATHIAN] --> [Programmer, Tester]
