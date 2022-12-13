@@ -22,8 +22,10 @@ Enjoy playing our game ^_^
 
 
 ## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
+> - Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
+As for how the game operates, he designed it himself after researching it from numerous sources.
+When a player steps on the snake's head, a question will emerge; if the player properly answers, the question will not descend to the snake's tail. This is an addition to the traditional snake and ladder game. However, if the response is incorrect, it will descend to the snake's tail.
+- There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
 - What is the purpose of your project?
 - Why did you undertake it?
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
@@ -91,11 +93,14 @@ To do:
 
 
 ## Acknowledgements
-Give credit here.
-- This project was inspired by... 
-![Everything Is AWESOME](https://img.youtube.com/vi/fv8mgvsuSKY/0.jpg)![](https://www.youtube.com/watch?v=fv8mgvsuSKY "Everything Is AWESOME")
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
+Give credit here. 
+- https://th.wikipedia.org/wiki/เกมบันไดงู
+- https://www.w3schools.com/python/
+- https://www.pygame.org/wiki/GettingStarted
+- https://dr0id.bitbucket.io/legacy/pygame_tutorials.html  
+  
+### **<span style="font-size:100px;">`Youtube`</span>**  
+[![Here](https://img.youtube.com/vi/fv8mgvsuSKY/0.jpg)](https://www.youtube.com/watch?v=fv8mgvsuSKY)
 
 
 ## Contact
