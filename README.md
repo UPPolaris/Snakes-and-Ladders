@@ -1,6 +1,10 @@
 # Snake-and-Ladders
-> Outline a brief description of your project.
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+> 📌100-square snake and ladder game players, 2-4
+Everyone must have played the famous game Snakes and Ladders. Alternatively, through the eyes through the ears Snakes and ladders may be a board game that we are all familiar with.
+But wouldn't it be wonderful if we made this game simpler to play? Therefore, specifically for that, our group created this snakes and ladders game. which we've taken our understanding of Python from PSCP class.
+Use this project to review and improve your programming knowledge in Python.
+Enjoy playing our game ^_^
+<!-- Live demo [_here_](https://www.example.com). """If you have the project hosted somewhere, include the link here.""" -->
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -9,7 +13,7 @@
 * [Start Menu](#start-menu)
 * [Table](#table)
 * [Setup](#setup)
-* [Usage](#usage)
+* [Function](#function)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
@@ -26,15 +30,15 @@
 
 
 ## Technologies Used
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
-- Tech 3 - version 3.0
+- Tech 1 - python version 3.10
+- Tech 2 - pygame version 1.9.6
+- Tech 3 - vscode & live share
 
 
 ## Features
-List the ready features here:
-- Awesome feature 1
-- Awesome feature 2
+Our features:
+- Awesome feature 1: There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
+- Awesome feature 2: 
 - Awesome feature 3
 
 
@@ -51,15 +55,27 @@ What are the project requirements/dependencies? Where are they listed? A require
 Proceed to describe how to install / setup one's local environment / get started with the project.
 
 
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
+## Function
+### **<span style="font-size:100px;">`main_menu function`</span>**   
+Load the image of the home page. Then define the area of the start button and the exit button.
+If we click the mouse and the position of the mouse in the area of the button The command of that button will work.
+* start button -> exit this function (which will immediately call the next function, the game page)
+* quit button -> exit
+  
+https://github.com/UPPolaris/Snakes-and-Ladders/blob/04573650739466c93c6ad6a650d0fa5dd31f9cb6/test.py#L130-L148  
 
-`write-your-code-here`
+### **<span style="font-size:100px;">`main_game_ui function`</span>**   
+It is a function that loads all ui on the game page.
+Activated at the end of one player's turn.
+https://github.com/UPPolaris/Snakes-and-Ladders/blob/04573650739466c93c6ad6a650d0fa5dd31f9cb6/test.py#L107-L128  
+
+### **<span style="font-size:100px;">`playing_func function`</span>**  
+https://github.com/UPPolaris/Snakes-and-Ladders/blob/04573650739466c93c6ad6a650d0fa5dd31f9cb6/test.py#L31-L80  
+![img](https://raw.githubusercontent.com/UPPolaris/Snakes-and-Ladders/master/playing_func%20function.png)
 
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
+Project is : ✅ _complete_
 
 
 ## Room for Improvement
