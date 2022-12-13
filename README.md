@@ -22,7 +22,7 @@ Enjoy playing our game ^_^
 
 
 ## General Information
-> - Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
+> Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
 As for how the game operates, he designed it himself after researching it from numerous sources.
 When a player steps on the snake's head, a question will emerge; if the player properly answers, the question will not descend to the snake's tail. This is an addition to the traditional snake and ladder game. However, if the response is incorrect, it will descend to the snake's tail.
 - There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
