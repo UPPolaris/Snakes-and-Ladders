@@ -42,8 +42,7 @@ Considering that it is a project, a game that everyone should have played, and t
 ## ✨Features
 Our features:
 - **`Awesome feature 1`** There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
-- **`Awesome feature 2`** 
-- **`Awesome feature 3`**
+- **`Awesome feature 2`** After pushing the dice button, the user receives a status message.
 
 
 ## 🎮UI Game
