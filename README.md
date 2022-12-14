@@ -17,7 +17,7 @@ Enjoy playing our game ^_^
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
+<!-- * [License](#license) --> 
 
 
 ## 📚General Information
