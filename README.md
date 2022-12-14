@@ -102,16 +102,16 @@ https://github.com/UPPolaris/Snakes-and-Ladders/blob/04573650739466c93c6ad6a650d
 Project is : ✅ _complete_
 
 
-## ⚙️Room for Improvement
+## ⚙Room for Improvement
 Include areas of components that, in our opinion need improvement / could be improved. Also add TODOs for future development.
 
-Room for improvement:
-- **`Improvement to be done 1`** 
-- **`Improvement to be done 2`** 
+Room for Improvement:
+- **`Improvement to be done 1`** To make the game more challenging, increase the number of snakes rather than ladders.
+- **`Improvement to be done 2`** UI game
 
 To do:
 - **`Feature to be added 1`** We want to add a number of players to the game's home page so that people may participate in various scenarios.
-- **`Feature to be added 2`** 
+- **`Feature to be added 2`** Give different table layouts or allow players to select the amount of dice to add diversity to the game.
 
 
 ## 📑Acknowledgements
