@@ -24,9 +24,12 @@ Enjoy playing our game ^_^
 > 📖 Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
 As for how the game operates, he designed it himself after researching it from numerous sources.
 When a player steps on the snake's head, a question will emerge; if the player properly answers, the question will not descend to the snake's tail. This is an addition to the traditional snake and ladder game. However, if the response is incorrect, it will descend to the snake's tail.
-- **`What problems did you face with this project?`** There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
-- **`What is the purpose of your project?`** For developing games for enjoyment and honing Python programming abilities.
-- **`Why did you undertake it?`** Considering that it is a project, a game that everyone should have played, and the rules are not very complicated. and straightforward
+- **`What problems did you face with this project?`**  
+There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
+- **`What is the purpose of your project?`**  
+For developing games for enjoyment and honing Python programming abilities.
+- **`Why did you undertake it?`**  
+Considering that it is a project, a game that everyone should have played, and the rules are not very complicated and straightforward.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
@@ -38,9 +41,9 @@ When a player steps on the snake's head, a question will emerge; if the player p
 
 ## ✨Features
 Our features:
-- **`Awesome feature 1 :`** There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
-- **`Awesome feature 2 :`** 
-- **`Awesome feature 3 :`**
+- **`Awesome feature 1`** There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
+- **`Awesome feature 2`** 
+- **`Awesome feature 3`**
 
 
 ## 🎮UI Game
@@ -69,7 +72,7 @@ Our features:
       🐍 If treading on a snake's head raises any queries that need to be answered.  
    >    * If the participant responds accurately The same location as the player.  
    >    * If the participant responds wrongly Place the player back at the snake's tail.
-      If you never tread on a snake's head or a ladder. The same location as the player
+      If you never tread on a snake's head or a ladder. The same location as the player.
   
 5. Look to see whether there is a winner.  
 >    * If a winner is declared Declare the game over and the winner.  
@@ -99,7 +102,7 @@ https://github.com/UPPolaris/Snakes-and-Ladders/blob/04573650739466c93c6ad6a650d
 Project is : ✅ _complete_
 
 
-## Room for Improvement
+## ⚙️Room for Improvement
 Include areas of components that, in our opinion need improvement / could be improved. Also add TODOs for future development.
 
 Room for improvement:
