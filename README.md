@@ -110,7 +110,7 @@ Room for improvement:
 - **`Improvement to be done 2`** 
 
 To do:
-- **`Feature to be added 1`** 
+- **`Feature to be added 1`** We want to add a number of players to the game's home page so that people may participate in various scenarios.
 - **`Feature to be added 2`** 
 
 
