@@ -11,7 +11,7 @@ Enjoy playing our game ^_^
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [UI Game](#ui-game)
-* [Setup](#setup)
+* [Workflow](#workflow)
 * [Function](#function)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
@@ -38,9 +38,9 @@ When a player steps on the snake's head, a question will emerge; if the player p
 
 ## ✨Features
 Our features:
-- Awesome feature 1: There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
-- Awesome feature 2: 
-- Awesome feature 3
+- **`Awesome feature 1 :`** There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
+- **`Awesome feature 2 :`** 
+- **`Awesome feature 3 :`**
 
 
 ## 🎮UI Game
@@ -51,10 +51,29 @@ Our features:
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
-## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+## ⏳Workflow
+1. Before beginning the game It will show the game's home page. 
+>    * It will show the game play page once you touch the start button.
+>    * The game will end if the quit button is pressed.
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+2. Various UI pages will show as the player accesses the game page, and there will be a Roll dice button to begin rolling the dice.
+3. When rolling the dice, push the button.
+>    * A 1-6-dice randomization scheme
+>    * Include the player's current position in the points total.
+  
+   The player remains where they are if their score is more than 100.  
+   The player moves to the box that contains the total of the two numbers if the point does not exceed 100.
+  
+4. Verify if the gamer stepped on the snake's head or the ladder.  
+      🪜 When ascending stairs positions the player at the top of the ladder.  
+      🐍 If treading on a snake's head raises any queries that need to be answered.  
+>    * If the participant responds accurately The same location as the player.  
+>    * If the participant responds wrongly Place the player back at the snake's tail.
+      If you never tread on a snake's head or a ladder. The same location as the player
+  
+5. Look to see whether there is a winner.  
+>    * If a winner is declared Declare the game over and the winner.  
+>    * If no one is victorious Rewind to verse 3 now.
 
 
 ## 💻Function
@@ -81,15 +100,15 @@ Project is : ✅ _complete_
 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
+Include areas of components that, in our opinion need improvement / could be improved. Also add TODOs for future development.
 
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
+- **`Improvement to be done 1`** 
+- **`Improvement to be done 2`** 
 
 To do:
-- Feature to be added 1
-- Feature to be added 2
+- **`Feature to be added 1`** 
+- **`Feature to be added 2`** 
 
 
 ## 📑Acknowledgements
