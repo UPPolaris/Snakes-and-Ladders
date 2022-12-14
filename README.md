@@ -10,8 +10,7 @@ Enjoy playing our game ^_^
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Start Menu](#start-menu)
-* [Table](#table)
+* [UI Game](#ui-game)
 * [Setup](#setup)
 * [Function](#function)
 * [Project Status](#project-status)
@@ -25,9 +24,9 @@ Enjoy playing our game ^_^
 > 📖 Python-based four-player Snake & Ladder game with Pygame as the primary game module. The majority of PyGame's features involve taking mouse input and displaying it on the screen.
 As for how the game operates, he designed it himself after researching it from numerous sources.
 When a player steps on the snake's head, a question will emerge; if the player properly answers, the question will not descend to the snake's tail. This is an addition to the traditional snake and ladder game. However, if the response is incorrect, it will descend to the snake's tail.
-- There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
-- What is the purpose of your project?
-- Why did you undertake it?
+- **`What problems did you face with this project?`** There was a small obstruction. For instance, if you forget to write any code, you may quickly inspect and fix it.
+- **`What is the purpose of your project?`** For developing games for enjoyment and honing Python programming abilities.
+- **`Why did you undertake it?`** Considering that it is a project, a game that everyone should have played, and the rules are not very complicated. and straightforward
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
@@ -37,16 +36,17 @@ When a player steps on the snake's head, a question will emerge; if the player p
 - Tech 3 - vscode & live share
 
 
-## Features
+## ✨Features
 Our features:
 - Awesome feature 1: There is a system to prevent the flow from the snake's head, just answer simple questions correctly.
 - Awesome feature 2: 
 - Awesome feature 3
 
 
-## Start Menu
+## 🎮UI Game
+### **<span style="font-size:100px;">`Start Menu`</span>**
 ![Example screenshot](https://raw.githubusercontent.com/UPPolaris/Snakes-and-Ladders/master/Mainmenu_bg.png)
-## Table
+### **<span style="font-size:100px;">`Table`</span>**
 ![Example screenshot](https://raw.githubusercontent.com/UPPolaris/Snakes-and-Ladders/master/table_1.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
