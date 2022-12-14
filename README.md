@@ -69,8 +69,8 @@ Our features:
 4. Verify if the gamer stepped on the snake's head or the ladder.  
       🪜 When ascending stairs positions the player at the top of the ladder.  
       🐍 If treading on a snake's head raises any queries that need to be answered.  
-   >    * If the participant responds accurately The same location as the player.  
-   >    * If the participant responds wrongly Place the player back at the snake's tail.
+   >    * If the player responds accurately The same location as the player.  
+   >    * If the player responds wrongly Place the player back at the snake's tail.
       If you never tread on a snake's head or a ladder. The same location as the player.
   
 5. Look to see whether there is a winner.  
